@@ -1,22 +1,30 @@
+import { getAuthHeaders } from './auth';
+
 export async function fetchBookings() {
-  const res = await fetch('http://localhost:4000/api/bookings');
+  const res = await fetch('http://localhost:4000/api/bookings', {
+    headers: getAuthHeaders(),
+  });
   return res.json();
 }
 
 export async function fetchTours() {
-  const res = await fetch('http://localhost:4000/api/tours');
+  const res = await fetch('http://localhost:4000/api/tours', {
+    headers: getAuthHeaders(),
+  });
   return res.json();
 }
 
 export async function fetchUsers() {
-  const res = await fetch('http://localhost:4000/api/users');
+  const res = await fetch('http://localhost:4000/api/users', {
+    headers: getAuthHeaders(),
+  });
   return res.json();
 }
 
 export async function createBooking(data: { userId: number; tourId: number; date: string; people: number }) {
   const res = await fetch('http://localhost:4000/api/bookings', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getAuthHeaders(),
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error('Failed to create booking');
@@ -42,9 +50,7 @@ export const createTour = async (tourData: {
 }) => {
   const response = await fetch('http://localhost:4000/api/tours', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: getAuthHeaders(),
     body: JSON.stringify(tourData),
   });
   
