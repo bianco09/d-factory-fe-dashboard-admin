@@ -61,3 +61,52 @@ export const createTour = async (tourData: {
   
   return response.json();
 };
+
+export const updateTour = async (tourId: number, tourData: {
+  title: string;
+  description: string;
+  location: string;
+  days: number;
+  price: number;
+  type: string;
+  startDate?: string;
+  endDate?: string;
+  categories?: string[];
+  included?: string[];
+  excluded?: string[];
+  status?: string;
+  completionPercentage?: number;
+  tourPlans?: Array<{
+    day: number;
+    title: string;
+    description: string;
+    included?: string[];
+  }>;
+}) => {
+  const response = await fetch(`http://localhost:4000/api/tours/${tourId}`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(tourData),
+  });
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to update tour');
+  }
+  
+  return response.json();
+};
+
+export const deleteTour = async (tourId: number) => {
+  const response = await fetch(`http://localhost:4000/api/tours/${tourId}`, {
+    method: 'DELETE',
+    headers: getAuthHeaders(),
+  });
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to delete tour');
+  }
+  
+  return response.json();
+};
