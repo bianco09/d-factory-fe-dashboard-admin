@@ -8,11 +8,14 @@ import Link from "next/link";
 interface Booking {
   id: number;
   tour: { title: string };
-  user: { name: string; email?: string };
+  user: { name: string; email?: string } | null;
+  guestName: string | null;
+  guestEmail: string | null;
+  guestPhone: string | null;
   date: string;
   people: number;
   status: string;
-  price: number;
+  total: number;
 }
 
 export default function DashboardBookings() {
