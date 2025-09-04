@@ -934,7 +934,7 @@ export default function TourForm({ onCreated, editingTour }: {
         
         <button 
           type="button"
-          onClick={(e) => handleSubmit(e as any, true)}
+          onClick={(e) => handleSubmit(e as React.FormEvent, true)}
           className="flex-1 px-8 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
           disabled={loading}
         >

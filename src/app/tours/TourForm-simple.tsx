@@ -73,8 +73,8 @@ export default function TourForm({ onCreated }: { onCreated?: () => void }) {
       });
       if (editor) editor.commands.setContent("");
       if (onCreated) onCreated();
-    } catch (err: any) {
-      setError(err.message || "Error creating tour");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Error creating tour");
     } finally {
       setLoading(false);
     }
